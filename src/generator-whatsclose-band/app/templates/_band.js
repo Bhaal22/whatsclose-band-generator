@@ -10,7 +10,7 @@ band_module.band = new Band();
 band_module.band.name = '<%= bandName %>';
 band_module.band.website = '<%= website %>';
 
-band_module.band.styles = <%= styles};
+band_module.band.styles = <%= styles %>;
 
 // Override the method that assess the web page structure
 band_module.testDataAcess = function(window) {
@@ -37,7 +37,7 @@ band_module.testDataAcess = function(window) {
 
 // Override the method that retrieve the events data
 band_module.processData = function(window) {
-  winston.info('<%= bandName} processDate');
+  winston.info('<%= bandName %> processDate');
 
   var $ = require('jquery')(window);
   

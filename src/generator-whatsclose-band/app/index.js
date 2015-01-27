@@ -9,16 +9,43 @@ module.exports = generators.Base.extend({
     this.bandName = this._.humanize(this.bandName);
   },
 
-  prompting: function () {
+  asking_website: function () {
     var done = this.async();
-    this.prompt({
+
+    var prompts = [{
       type    : 'input',
       name    : 'website',
       message : 'Band WebSite'
-    }, function (answers) {
-      this.log(answers.name);
-      this.log(this.bandName);
+    },{
+      type    : 'input',
+      name    : 'tourUrl',
+      message : 'Tour URL'
+    }];
+
+    this.prompt(prompts, function (props) {
+      this.website = props.website;
+      this.tourUrl = props.tourUrl;
+      this.styles = [];
+      this.inputDateFormat = 'yyyy-MM-dd';
+
       done();
     }.bind(this));
+  },
+
+  scaffoldFolders: function(){
+    this.mkdir("app");
+  },
+
+  render: function(){
+ 
+    var context = {
+      tourUrl: this.tourUrl,
+      bandName: this.bandName,
+      website: this.website,
+      styles: this.styles,
+      inputDateFormat: this.inputDateFormat
+    };
+    
+    this.template("_band.js", "app/band.js", context);
   }
 });
