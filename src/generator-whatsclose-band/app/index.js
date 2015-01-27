@@ -5,8 +5,8 @@ module.exports = generators.Base.extend({
     // Calling the super constructor is important so our generator is correctly set up
     generators.Base.apply(this, arguments);
 
-    this.argument('bandName', { type: String, required: true });
-    this.bandName = this._.humanize(this.bandName);
+    this.argument('rawBandName', { type: String, required: true });
+    this.bandName = this._.humanize(this.rawBandName);
   },
 
   asking_website: function () {
@@ -20,12 +20,16 @@ module.exports = generators.Base.extend({
       type    : 'input',
       name    : 'tourUrl',
       message : 'Tour URL'
+    }, {
+      type    : 'input',
+      name    : 'styles',
+      message : 'Music Styles (separated by ,)'
     }];
 
     this.prompt(prompts, function (props) {
       this.website = props.website;
       this.tourUrl = props.tourUrl;
-      this.styles = [];
+      this.styles = ['toto', 'tata'];
       this.inputDateFormat = 'yyyy-MM-dd';
 
       done();
@@ -46,6 +50,6 @@ module.exports = generators.Base.extend({
       inputDateFormat: this.inputDateFormat
     };
     
-    this.template("_band.js", "app/band.js", context);
+    this.template("_band.js", "app/" + this.rawBandName + ".js", context);
   }
 });
