@@ -29,7 +29,13 @@ module.exports = generators.Base.extend({
     this.prompt(prompts, function (props) {
       this.website = props.website;
       this.tourUrl = props.tourUrl;
-      this.styles = ['toto', 'tata'];
+
+      var _styles = props.styles.split(',');
+      this.styles = _styles.map(function(s) {
+        return '\'' + s.trim() + '\'';
+      });
+
+      this.log(this.styles);
       this.inputDateFormat = 'yyyy-MM-dd';
 
       done();

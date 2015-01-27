@@ -10,7 +10,7 @@ band_module.band = new Band();
 band_module.band.name = '<%= bandName %>';
 band_module.band.website = '<%= website %>';
 
-band_module.band.styles = <%= styles %>;
+band_module.band.styles = [<%= styles.join(',')  %>];
 
 // Override the method that assess the web page structure
 band_module.testDataAcess = function(window) {
